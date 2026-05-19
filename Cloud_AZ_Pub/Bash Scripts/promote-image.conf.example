@@ -1,0 +1,47 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# promote-image.conf.example
+#
+# Sample configuration file for promote-image.sh
+#
+# Usage:
+#   1. Copy this file to one of:
+#      - ./promote-image.conf            (alongside the script)
+#      - ~/.config/promote-image.conf    (per-user)
+#   2. Fill in your environment-specific values below
+#   3. Run the promotion script: ./promote-image.sh <version>
+#
+# Security note:
+#   These values are not secrets per se — subscription IDs and resource names
+#   are not credentials. However, you may still want to keep this file out of
+#   version control if your organization treats them as sensitive.
+#   Add `promote-image.conf` to .gitignore.
+# ─────────────────────────────────────────────────────────────────────────────
+
+# ─── Subscription IDs (UUIDs) ────────────────────────────────────────────────
+export DEV_SUB_ID="<dev-subscription-id>"
+export PROD_SUB_ID="<prod-subscription-id>"
+
+# ─── DEV (source) gallery ────────────────────────────────────────────────────
+export DEV_RG="<dev-resource-group>"
+export DEV_GALLERY="<dev-gallery-name>"
+
+# ─── PROD (target) gallery ───────────────────────────────────────────────────
+export PROD_RG="<prod-resource-group>"
+export PROD_GALLERY="<prod-gallery-name>"
+
+# ─── Default image definition (override per-promotion via CLI arg) ───────────
+export DEFAULT_IMAGE_DEF="<default-image-definition-name>"
+
+# ─── Target regions and replica count ────────────────────────────────────────
+# Space-separated list of Azure regions
+export TARGET_REGIONS="<primary-region> <dr-region>"
+export REPLICA_COUNT=2
+
+# ─── Optional: retention policy ──────────────────────────────────────────────
+# Uncomment to enforce an end-of-life date and deletion protection
+# export END_OF_LIFE_DATE="$(date -d '+1 year' +%Y-%m-%d)"
+# export BLOCK_DELETION="false"
+
+# ─── Optional: custom log directory ──────────────────────────────────────────
+# Defaults to ~/.azure-gallery-promotions if not set
+# export LOG_DIR="/var/log/azure-promotions"
